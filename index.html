@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Billeteras virtuales y criptomonedas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fafbfc;--ink:#14213d;--muted:#55607a;--line:#dde3ec;--surface:#fff;--accent:#0e7c86;--accent-ink:#fff;--amber:#f2a541}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1626;--ink:#e8edf6;--muted:#9aa6bf;--line:#26324b;--surface:#16203a;--accent:#4fc3cd;--accent-ink:#0f1626}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:18px/1.7 "Source Serif 4",Georgia,serif}
+h1,h2,h3,figcaption,.tag{font-family:"Bricolage Grotesque",system-ui,sans-serif}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.hero{background:linear-gradient(rgba(20,33,61,.6),rgba(20,33,61,.6)),linear-gradient(120deg,#14213d,#0e7c86);background-size:cover;background-position:center;color:#fff;padding:4rem 1.25rem 3.5rem;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.16) 1.5px,transparent 1.5px);background-size:26px 26px}
+.hero-img{position:absolute;right:6%;top:50%;transform:translateY(-50%);height:70%;max-height:230px;opacity:.22;pointer-events:none}
+.hero-in{position:relative;max-width:860px;margin:0 auto}
+.hero .kicker{display:flex;align-items:center;gap:.6rem;font-family:"Bricolage Grotesque",sans-serif;font-weight:500;opacity:.9}
+.hero h1{margin:1rem 0 .6rem;font-size:clamp(2rem,6vw,3.4rem);line-height:1.1;max-width:20ch}
+.hero p{margin:0;font-family:"Bricolage Grotesque",sans-serif;opacity:.9}
+main{max-width:860px;margin:0 auto;padding:2rem 1.25rem 3rem}
+h2{font-size:1.5rem;margin:2.6rem 0 .4rem}
+p{margin:.6rem 0 1rem;max-width:70ch}
+.tag{display:inline-block;font-size:.85rem;background:var(--line);padding:.15rem .7rem;border-radius:99px;color:var(--muted)}
+blockquote{margin:1rem 0;padding:.2rem 1.2rem;border-left:4px solid var(--accent);background:var(--surface)}
+.cita-datos{color:#d90429;font-weight:700}
+.cita-texto{color:#1d4ed8;font-weight:700}
+figure{margin:1.2rem 0}
+figure img{max-width:100%;border-radius:8px;display:block}
+.ph{background:var(--line);border-radius:8px;min-height:200px;display:grid;place-items:center;color:var(--muted);text-align:center;padding:1rem;font-family:"Bricolage Grotesque",sans-serif}
+figcaption{font-size:.85rem;color:var(--muted);margin-top:.4rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+.embed{position:relative;width:100%;aspect-ratio:16/9;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--surface)}
+.embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.card-video{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:.6rem 1.2rem}
+.card-video p{margin:.3rem 0}
+.infografia{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.info-head,.info-row{display:grid;grid-template-columns:1fr 1fr}
+.info-row{grid-template-columns:130px 1fr 1fr;border-top:1px solid var(--line)}
+.info-head{grid-template-columns:130px 1fr 1fr;color:#fff;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:1.15rem;text-align:center}
+.info-h{padding:1rem .5rem}.info-h small{font-weight:500;opacity:.85;font-size:.85rem}
+.info-h.w{background:#0e7c86}.info-h.c{background:#b9770e}
+.info-q{padding:.7rem .8rem;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;font-size:.9rem;background:var(--line);display:flex;align-items:center}
+.info-a{padding:.7rem .9rem;font-size:.92rem;line-height:1.45}
+.info-a.w{border-left:3px solid #0e7c86}.info-a.c{border-left:3px solid #f2a541}
+.info-foot{margin:0;padding:.8rem 1rem;text-align:center;font-family:"Bricolage Grotesque",sans-serif;font-weight:700;background:var(--bg);border-top:1px solid var(--line);max-width:none}
+@media (max-width:640px){.info-head{grid-template-columns:1fr 1fr}.info-head .info-h:first-child{display:none}.info-row{grid-template-columns:1fr}.info-q{padding:.4rem .8rem}}
+.refs p{padding-left:2rem;text-indent:-2rem;font-size:.95rem}
+.autor{display:flex;gap:1.2rem;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem 1.25rem;margin-top:2rem}
+.autor .ph{min-height:0;width:84px;height:84px;border-radius:50%;flex:none;font-size:.7rem}
+.autor img{width:84px;height:84px;border-radius:50%;object-fit:cover}
+.autor p{margin:0}
+footer{border-top:1px solid var(--line);background:var(--surface);padding:1.2rem;text-align:center;font-size:.85rem;color:var(--muted);font-family:"Bricolage Grotesque",sans-serif}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-in">
+    <div class="kicker">
+      <!-- Logotipo: reemplaza por <img src="img/logo.png" height="36" alt="Logotipo"> -->
+      <svg width="36" height="36" viewBox="0 0 36 36" role="img" aria-label="Logotipo"><rect width="36" height="36" rx="9" fill="#fff" fill-opacity=".18"/><path d="M9 25V11l9 8 9-8v14" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Dinero digital, criptomonedas y la promesa de ser rico
+    </div>
+    <h1>Billeteras virtuales (Yape, Plin) y funcionamiento de las criptomonedas</h1>
+    <p>Estrategias y Herramientas Digitales para el Aprendizaje · 2026-20</p>
+  </div>
+</header>
+
+<main>
+  <p><span class="tag">Autor: Geng Balbín, Andrés</span></p>
+
+  <h2>Introducción</h2>
+  <p>Las billeteras virtuales, como Yape y Plin, permiten enviar y recibir soles desde el celular usando dinero que la persona ya tiene dentro del sistema financiero. Las criptomonedas, en cambio, son activos digitales que funcionan sobre una red descentralizada, sin un banco ni un Estado que las administre. Ambas forman parte del llamado dinero digital, pero responden a lógicas distintas: una facilita los pagos cotidianos y la otra propone reemplazar la confianza en las instituciones por tecnología.</p>
+
+  <h2>Cita directa</h2>
+  <blockquote><p>
+    Sobre el origen de las criptomonedas, <span class="cita-datos">Nakamoto (2008)</span> sostuvo que hacía falta <span class="cita-texto">“an electronic payment system based on cryptographic proof instead of trust”</span> <span class="cita-datos">(p. 1)</span>, es decir, un sistema de pago electrónico basado en pruebas criptográficas y no en la confianza en un intermediario (traducción propia). Con esa idea nació Bitcoin, la primera criptomoneda.
+  </p></blockquote>
+
+  <h2>Cita indirecta (paráfrasis)</h2>
+  <p>En el Perú, el Banco Central de Reserva diseñó en 2022 una estrategia de interoperabilidad de los pagos minoristas dividida en cuatro fases. La primera, iniciada en marzo de 2023, conectó a las dos billeteras digitales más grandes del país, Yape y Plin, de modo que quienes usan una pueden enviar dinero a quienes usan la otra <span class="cita-datos">(Fernández & García, 2024)</span>. Esto muestra que las billeteras virtuales operan dentro de un sistema financiero regulado y supervisado por el banco central.</p>
+
+  <div class="grid2">
+    <figure>
+      <svg viewBox="0 0 600 220" role="img" aria-label="Tres bloques encadenados mediante hashes" style="width:100%;background:var(--surface);border:1px solid var(--line);border-radius:8px">
+        <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#0e7c86"/></marker></defs>
+        <g font-family="Bricolage Grotesque,sans-serif" font-size="13" fill="currentColor" style="color:var(--ink)">
+          <g><rect x="15" y="40" width="160" height="130" rx="10" fill="none" stroke="#0e7c86" stroke-width="2"/><text x="95" y="68" text-anchor="middle" font-weight="700">Bloque 1</text><text x="95" y="100" text-anchor="middle">Transacciones</text><text x="95" y="130" text-anchor="middle" font-size="11">Hash: a1f3…</text></g>
+          <g><rect x="220" y="40" width="160" height="130" rx="10" fill="none" stroke="#0e7c86" stroke-width="2"/><text x="300" y="68" text-anchor="middle" font-weight="700">Bloque 2</text><text x="300" y="100" text-anchor="middle">Transacciones</text><text x="300" y="120" text-anchor="middle" font-size="11">Hash previo: a1f3…</text><text x="300" y="145" text-anchor="middle" font-size="11">Hash: 9c7b…</text></g>
+          <g><rect x="425" y="40" width="160" height="130" rx="10" fill="none" stroke="#0e7c86" stroke-width="2"/><text x="505" y="68" text-anchor="middle" font-weight="700">Bloque 3</text><text x="505" y="100" text-anchor="middle">Transacciones</text><text x="505" y="120" text-anchor="middle" font-size="11">Hash previo: 9c7b…</text><text x="505" y="145" text-anchor="middle" font-size="11">Hash: 4d2e…</text></g>
+          <path d="M175 105H218" stroke="#0e7c86" stroke-width="2.5" marker-end="url(#ar)"/><path d="M380 105H423" stroke="#0e7c86" stroke-width="2.5" marker-end="url(#ar)"/>
+          <text x="300" y="203" text-anchor="middle" font-size="12" opacity=".75">Cada bloque guarda el hash del anterior</text>
+        </g>
+      </svg>
+      <figcaption><strong>Cadena de bloques (blockchain).</strong> Fuente: elaboración propia, basada en <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">Nakamoto (2008)</a>. Los valores son ilustrativos.</figcaption>
+    </figure>
+    <figure>
+      <svg viewBox="0 0 600 220" role="img" aria-label="Comparación entre billetera virtual con banco y billetera de criptomonedas" style="width:100%;background:var(--surface);border:1px solid var(--line);border-radius:8px">
+        <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#f2a541"/></marker></defs>
+        <g font-family="Bricolage Grotesque,sans-serif" font-size="12" fill="currentColor" style="color:var(--ink)" text-anchor="middle">
+          <text x="150" y="26" font-weight="700" font-size="14">Yape / Plin</text>
+          <rect x="50" y="42" width="200" height="38" rx="8" fill="none" stroke="#0e7c86" stroke-width="2"/><text x="150" y="66">Persona con app en el celular</text>
+          <rect x="50" y="102" width="200" height="38" rx="8" fill="none" stroke="#0e7c86" stroke-width="2"/><text x="150" y="126">Banco (sistema regulado)</text>
+          <rect x="50" y="162" width="200" height="38" rx="8" fill="none" stroke="#0e7c86" stroke-width="2"/><text x="150" y="186">Dinero en soles</text>
+          <path d="M150 80V100M150 140V160" stroke="#0e7c86" stroke-width="2.5" marker-end="url(#ar)"/>
+          <text x="450" y="26" font-weight="700" font-size="14">Criptomonedas</text>
+          <rect x="350" y="42" width="200" height="38" rx="8" fill="none" stroke="#f2a541" stroke-width="2"/><text x="450" y="66">Persona con billetera cripto</text>
+          <rect x="350" y="102" width="200" height="38" rx="8" fill="none" stroke="#f2a541" stroke-width="2"/><text x="450" y="126">Red blockchain (sin banco)</text>
+          <rect x="350" y="162" width="200" height="38" rx="8" fill="none" stroke="#f2a541" stroke-width="2"/><text x="450" y="186">Activo digital (precio variable)</text>
+          <path d="M450 80V100M450 140V160" stroke="#f2a541" stroke-width="2.5" marker-end="url(#ar2)"/>
+        </g>
+      </svg>
+      <figcaption><strong>Billetera virtual vs. billetera de criptomonedas.</strong> Fuente: elaboración propia, basada en <a href="https://www.bcrp.gob.pe/docs/publicaciones/revista-moneda/moneda-199/moneda-199-02.pdf" target="_blank" rel="noopener">Fernández y García (2024)</a> y Nakamoto (2008).</figcaption>
+    </figure>
+  </div>
+
+  <h2>Video</h2>
+  <div class="card-video">
+    <p><strong>Qué es una blockchain y cómo funciona | #TeLoExplico</strong></p>
+    <p>Video explicativo sobre el origen de la tecnología blockchain y cómo opera.</p>
+    <p><a href="https://recapio.com/digest/que-es-una-blockchain-y-como-funciona-teloexplico-by-teloexplicovideo" target="_blank" rel="noopener">Ver el video y su resumen en la web</a></p>
+  </div>
+  <figcaption><strong>Qué es una blockchain y cómo funciona | #TeLoExplico.</strong> Fuente: <a href="https://recapio.com/digest/que-es-una-blockchain-y-como-funciona-teloexplico-by-teloexplicovideo" target="_blank" rel="noopener">canal TeLoExplico (YouTube), vía Recapio</a></figcaption>
+
+  <h2>Infografía</h2>
+  <!-- Si prefieres tu infografía de Canva/Genially, reemplaza todo el bloque .infografia por:
+  <div class="embed"><iframe src="TU_ENLACE_DE_INSERCION" title="Infografía" allowfullscreen loading="lazy"></iframe></div> -->
+  <div class="infografia" role="group" aria-label="Infografía: billeteras virtuales y criptomonedas">
+    <div class="info-head"><div class="info-h"></div><div class="info-h w">Billeteras virtuales<br><small>Yape · Plin</small></div><div class="info-h c">Criptomonedas<br><small>Bitcoin</small></div></div>
+    <div class="info-row"><div class="info-q">¿Qué son?</div><div class="info-a w">Apps que mueven tu dinero en soles desde el celular.</div><div class="info-a c">Activos digitales que existen solo en una red de computadoras.</div></div><div class="info-row"><div class="info-q">¿Quién las respalda?</div><div class="info-a w">Un banco y el sistema financiero, con reglas del BCRP.</div><div class="info-a c">Nadie en particular: funcionan sin banco ni Estado.</div></div><div class="info-row"><div class="info-q">¿Cómo se validan los pagos?</div><div class="info-a w">El banco registra y confirma cada operación.</div><div class="info-a c">La red valida y encadena las operaciones en bloques (blockchain).</div></div><div class="info-row"><div class="info-q">Dato clave</div><div class="info-a w">Desde marzo de 2023, Yape y Plin se pueden enviar dinero entre sí.</div><div class="info-a c">Bitcoin nació en 2008 con el documento de Nakamoto.</div></div><div class="info-row"><div class="info-q">Riesgo principal</div><div class="info-a w">Fraudes y suplantación, como en cualquier app de pagos.</div><div class="info-a c">Su precio puede subir o caer con mucha rapidez.</div></div>
+    <p class="info-foot">Idea clave: Yape y Plin son un medio de pago; las criptomonedas son un activo de precio variable.</p>
+  </div>
+  <p style="font-size:.85rem;color:var(--muted)"><strong>Infografía: dinero digital, dos caminos.</strong> Fuente: elaboración propia, con datos de <a href="https://www.bcrp.gob.pe/docs/publicaciones/revista-moneda/moneda-199/moneda-199-02.pdf" target="_blank" rel="noopener">Fernández y García (2024)</a> y <a href="https://bitcoin.org/bitcoin.pdf" target="_blank" rel="noopener">Nakamoto (2008)</a>.</p>
+
+  <h2>Análisis y reflexión final</h2>
+  <p>Yape y Plin acostumbraron a muchas personas a pagar con el celular, y esa confianza puede hacer que cualquier aplicación que mueve dinero parezca igual de segura. Sin embargo, no es lo mismo: en una billetera el dinero está en soles y dentro de un sistema regulado, mientras que el precio de una criptomoneda puede subir o caer con mucha rapidez y nadie garantiza su valor. Por eso, las promesas de hacerse rico rápido con criptomonedas deben analizarse con cautela, y la educación financiera es clave para distinguir un medio de pago de una inversión de alto riesgo.</p>
+
+  <h2>Referencias bibliográficas</h2>
+  <div class="refs">
+    <p>Fernández, M., & García, M. (2024, setiembre). La Fase 2 de la estrategia de interoperabilidad ha impulsado el uso de los pagos digitales en el Perú. <em>Moneda</em>, (199). Banco Central de Reserva del Perú. https://www.bcrp.gob.pe/docs/publicaciones/revista-moneda/moneda-199/moneda-199-02.pdf</p><!-- VERIFICA en el PDF: título exacto del artículo, nombres de los autores (iniciales) y páginas -->
+    <p>Nakamoto, S. (2008). <em>Bitcoin: A peer-to-peer electronic cash system</em>. https://bitcoin.org/bitcoin.pdf</p>
+  </div>
+
+  <div class="autor">
+    <img id="foto" src="https://lh3.googleusercontent.com/pw/AP1GczOv5nO1mn29vT3TJiGhS8MWtysN_LblrffENgObd3JQhKAtDAj58k_BLTGMoV2ffP8TAG4K26zZGfa22n0T-SqTPHANMfXs1vnM1_GTUgkbva610RI=s520-no" alt="Foto de Andrés Geng Balbín" referrerpolicy="no-referrer" data-l="img/foto.jpg|https://media.licdn.com/dms/image/v2/D4D03AQFGe1oO0nSNcg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1697053019379?e=2147483647&amp;v=beta&amp;t=z9AFqI4VYCar2ur8LSHNdGfpkarPe5GqgaR8qfdVx9w|https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyx6M4XDAPGmGQYkFRJ-XhO3_kEi_utYmjVScK6pTZVeOzvPCuiSeV7VE&amp;s=10" data-ini="data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230e7c86'/%3E%3Ctext x='50' y='64' font-size='42' font-family='Arial' font-weight='700' fill='white' text-anchor='middle'%3EAG%3C/text%3E%3C/svg%3E" onerror="var e=this,l=e.dataset.l.split('|'),k=+(e.dataset.k||0);if(k<l.length){e.dataset.k=k+1;e.src=l[k]}else{e.onerror=null;e.src=e.dataset.ini}">
+    <p><strong>Geng Balbín, Andrés</strong><br>Ingeniería de Sistemas · <a href="https://www.linkedin.com/in/TU-PERFIL" target="_blank" rel="noopener">LinkedIn</a></p>
+  </div>
+</main>
+
+<footer>
+  <a rel="license" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank" rel="noopener">CC BY-NC 4.0</a>
+  · © 2026 Andrés Geng Balbín · Última actualización: <span id="fecha"></span>
+</footer>
+<script>document.getElementById('fecha').textContent=new Date(document.lastModified).toLocaleDateString('es-PE',{day:'2-digit',month:'long',year:'numeric'});</script>
+</body>
+</html>
